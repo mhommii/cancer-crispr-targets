@@ -1,0 +1,13 @@
+KRAS codon 12 in genomic context
+============================================
+Gene on the minus strand; codon 12 at positions 40103-40105 of the downloaded region.
+
+wild-type codon: GGT (glycine)
+
+Guides found per substitution:
+  G12C:  2 guides  (0 create a new PAM, 2 put the change in the seed)
+  G12D:  2 guides  (0 create a new PAM, 2 put the change in the seed)
+  G12V:  2 guides  (0 create a new PAM, 2 put the change in the seed)
+  G12A:  2 guides  (0 create a new PAM, 2 put the change in the seed)
+  G12S:  2 guides  (0 create a new PAM, 2 put the change in the seed)
+  G12R:  2 guides  (0 create a new PAM, 2 put the change in the seed)
