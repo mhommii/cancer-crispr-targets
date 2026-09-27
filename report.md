@@ -85,7 +85,7 @@ So the question is never whether a guide has an off-target here. It does, unavoi
 - **Nothing here is validated.** These are sequence analyses, not evidence that any guide discriminates in cells.
 - **Recurrent mutation is not dependency.** A gene being mutated often does not show the tumour needs it. That requires functional work, such as a CRISPR screen.
 - **Length correction is crude.** Mutations per kb ignores sequence context, replication timing and expression, all of which MutSigCV models properly.
-- **One chromosome.** Off-target search covers chr12 only (~2.6% of the genome), and no bulges are searched.
+- **One chromosome.** Off-target search covers chr12 only (~4.3% of the genome), and no bulges are searched.
 - **Discrimination is predicted from position alone.** Whether a one-base difference is actually enough depends on the guide, the chromatin and the Cas9 variant used.
 
 ## Sources

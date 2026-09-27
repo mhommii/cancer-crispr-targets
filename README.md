@@ -62,7 +62,7 @@ Rank genes by how many patients carry a mutation and you get this:
 | 5 | RYR2 | 193 | 37.3% | ⚠️ 15 kb |
 | 9 | **KRAS** | 157 | 30.4% | ✅ genuine driver, buried |
 
-TTN encodes **titin — the largest human protein at 35,992 amino acids**. A gene with a hundred times the coding sequence collects roughly a hundred times the passenger mutations. Raw frequency rewards size, not importance ([Lawrence et al. 2013](https://doi.org/10.1038/nature12213)).
+TTN encodes **titin, the largest human protein** — the longest annotated transcript here carries 107,976 bp of coding sequence, about 36,000 residues. A gene with a hundred times the coding sequence collects roughly a hundred times the passenger mutations. Raw frequency rewards size, not importance ([Lawrence et al. 2013](https://doi.org/10.1038/nature12213)).
 
 ### Correcting for length
 
@@ -105,7 +105,7 @@ Length correction is crude. [OncodriveCLUST](https://doi.org/10.1093/bioinformat
 
 ![KRAS lollipop](results/kras_lollipop.png)
 
-**KRAS**: one enormous spike at codon 12 (67 patients: G12C/V/S/D/A), then G13 and Q61 — the classic RAS hotspots, nearly all missense. OncodriveCLUST puts it top with FDR 0.034.
+**KRAS**: **143 of its 161 mutations sit at codon 12**, with G12C alone accounting for 67 patients, then G12V (36), G12D (19) and G12A (16). After that, G13 and Q61 — the classic RAS hotspots, nearly all missense. OncodriveCLUST puts KRAS top with FDR 0.034, 152 of 161 mutations in a single cluster.
 
 <details>
 <summary><b>The contrasting TP53 pattern, and the full oncoplot</b></summary>
@@ -163,6 +163,8 @@ Whether that is possible depends on **where the changed base sits relative to th
 
 Distance 0 means the changed base sits directly against the PAM — the most favourable position for discrimination.
 
+> **One guide per substitution is shown above** — the `TGG`-PAM guide whose mismatch sits closest to the PAM. Each substitution also has a second candidate on the `AGG` PAM further along, with the change 6–7 bases from the PAM. That makes **12 candidates in total**; all of them are in [`results/kras_guide_offtargets.tsv`](results/kras_guide_offtargets.tsv).
+
 Two findings worth stating plainly:
 
 - **Only two PAMs place a protospacer over codon 12.** The region is PAM-poor. That is a real constraint on allele-specific KRAS editing, not an oversight in the search.
@@ -179,7 +181,7 @@ Two findings worth stating plainly:
 
 ## Checks built in
 
-Each step stops rather than producing quietly wrong numbers. Two caught real bugs during development.
+Each step stops rather than producing quietly wrong numbers. One of them caught a real bug during development.
 
 <table>
 <tr><th>Step</th><th>Check</th><th>What it caught</th></tr>
@@ -271,7 +273,7 @@ The off-target search reuses the bit-packed method from [crispr-guide-design](ht
 - **Nothing here is validated.** These are sequence analyses. No guide has been tested, and none is a recommendation for any use.
 - **Recurrent mutation is not dependency.** A gene being mutated often does not show the tumour *needs* it. That requires functional work, such as a CRISPR screen.
 - **Length correction is crude.** Mutations per kb ignores sequence context, replication timing and expression — all of which [MutSigCV](https://doi.org/10.1038/nature12213) models properly. It is used here to demonstrate the effect, not as a substitute.
-- **One chromosome.** Off-target search covers chr12 only (~2.6% of the genome), and searches mismatches but not bulges.
+- **One chromosome.** Off-target search covers chr12 only (~4.3% of the genome), and searches mismatches but not bulges.
 - **Discrimination is predicted from position alone.** Whether one mismatch is actually enough depends on the guide, the chromatin context and the Cas9 variant used.
 - **Reference sources differ between projects.** chr12 here comes from Ensembl (UCSC was unreachable); the companion project used UCSC hg38. Both are GRCh38 primary assembly, so coordinates agree.
 

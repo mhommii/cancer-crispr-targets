@@ -118,10 +118,12 @@ if "TTN" in set(genes["Hugo_Symbol"]):
             f"CDS lengths look wrong: the longest is {longest}, not TTN.\n"
             f"Delete {cache_path.name} and re-run to fetch them again."
         )
-    titin_amino_acids = genes.loc[genes["Hugo_Symbol"] == "TTN",
-                                  "cds_bp"].iloc[0] / 3
+    # cds_bp / 3 counts codons, which includes the stop codon, so this is
+    # one more than the protein length in residues.
+    titin_codons = genes.loc[genes["Hugo_Symbol"] == "TTN",
+                             "cds_bp"].iloc[0] / 3
     print(f"Sanity check: TTN is the longest CDS "
-          f"({titin_amino_acids:,.0f} amino acids).")
+          f"({titin_codons:,.0f} codons).")
 genes["cds_kb"] = genes["cds_bp"] / 1000
 genes["mutations_per_kb"] = genes["total"] / genes["cds_kb"]
 
