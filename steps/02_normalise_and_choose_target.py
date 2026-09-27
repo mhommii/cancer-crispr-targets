@@ -27,6 +27,7 @@ Output:
   results/cds_lengths.tsv           cached, so NCBI is queried only once
 """
 
+import os
 import sys
 import time
 import tomllib
@@ -40,9 +41,15 @@ from Bio import Entrez, SeqIO
 
 ROOT = Path(__file__).resolve().parent.parent
 config = tomllib.loads((ROOT / "config.toml").read_text())
-if "@" not in config["email"]:
-    sys.exit("Put your email in config.toml first (NCBI requires it).")
-Entrez.email = config["email"]
+
+# NCBI asks every script that downloads data to identify itself with a
+# contact address. Read it from the environment first so that no real email
+# has to be committed to this public repository.
+email = os.environ.get("NCBI_EMAIL") or config.get("email", "")
+if "@" not in email:
+    sys.exit("Set NCBI_EMAIL in your environment (or edit config.toml) - "
+             "NCBI requires a contact address for downloads.")
+Entrez.email = email
 
 results = ROOT / "results"
 genes = pd.read_csv(results / "top_mutated_genes.tsv", sep="\t")

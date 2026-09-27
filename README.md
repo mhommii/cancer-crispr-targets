@@ -11,6 +11,7 @@
 ![Cohort](https://img.shields.io/badge/cohort-517%20patients-7FC4DC?style=flat-square)
 ![Steps](https://img.shields.io/badge/pipeline-5%2F5%20steps-6FD9A0?style=flat-square)
 ![AI assisted](https://img.shields.io/badge/built%20with-Claude%20Code-D8B366?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-7FC4DC?style=flat-square)
 
 **From real tumour mutation data to CRISPR guide candidates — including the step where you check whether the obvious answer is actually right.**
 
@@ -235,7 +236,7 @@ Rscript steps\03_positional_clustering.R     # several minutes
 # Python side
 py -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
-# put your own email in config.toml — NCBI requires one
+$env:NCBI_EMAIL = "you@example.com"   # NCBI requires a contact address
 
 .venv\Scripts\python.exe steps\02_normalise_and_choose_target.py
 .venv\Scripts\python.exe steps\04_design_allele_specific_guides.py
